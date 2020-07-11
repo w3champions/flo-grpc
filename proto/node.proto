@@ -1,0 +1,80 @@
+syntax = "proto3";
+package node;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Service runs on Flo nodes
+// Used by Flo Lobby
+service FloNode {
+  // Inspects this node, returns runtime stats
+  rpc Inspect(google.protobuf.Empty) returns (InspectReply) {}
+  // Creates a subscription id. Lobby uses this id to create game session
+  // and listen for game commands
+  rpc CreateSubscription(google.protobuf.Empty)
+      returns (CreateSubscriptionReply) {}
+  // Subscribes to game commands
+  rpc ListenCommands(ListenCommandRequest) returns (stream Command) {}
+  // Creates a game session
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionReply) {}
+  // Deletes a game session
+  rpc DeleteSession(DeleteSessionRequest) returns (google.protobuf.Empty) {}
+  // Injects W3GS packets, forward them to a specific game and its players
+  rpc InjectPacket(InjectPacketRequest) returns (google.protobuf.Empty) {}
+}
+
+message InspectReply {
+  uint32 timestamp = 1;
+  uint32 uptime_secs = 2;
+  uint32 num_of_sessions = 3;
+  uint32 num_of_connections = 4;
+}
+
+message CreateSubscriptionReply { int32 id = 1; }
+
+message CreateSessionRequest {
+  int32 game_id = 1;
+  int32 num_of_slots = 2;
+}
+
+message ListenCommandRequest { int32 subscription_id = 1; }
+
+message CreateSessionReply { Session session = 1; }
+
+message DeleteSessionRequest { bytes id = 1; }
+
+message Session {
+  bytes id = 1;
+  int32 game_id = 2;
+  repeated Slot slots = 3;
+}
+
+message Slot {
+  int32 player_id = 1;
+  uint32 secret = 2;
+  SlotStatus status = 3;
+}
+
+enum SlotStatus {
+  SlotStatusPending = 0;
+  SlotStatusConnected = 1;
+}
+
+message SubscribeCommandRequest {
+  int32 game_id = 1;
+  int32 player_id = 2;
+  string command = 3;
+}
+
+message Command {
+  int32 game_id = 1;
+  int32 player_id = 2;
+  string command = 3;
+}
+
+message InjectPacketRequest {
+  int32 session_id = 1;
+  repeated int32 to_player_ids = 2;
+  bytes packet = 3;
+}
