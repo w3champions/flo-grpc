@@ -1,0 +1,109 @@
+syntax = "proto3";
+package game;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "player.proto";
+
+message Game {
+  int32 id = 1;
+  string name = 2;
+  GameStatus status = 3;
+  Map map = 4;
+  repeated Slot slots = 5;
+  SelectedNode node = 6;
+  bool is_private = 7;
+  google.protobuf.Int32Value secret = 8;
+  bool is_live = 9;
+  int32 num_players = 10;
+  int32 max_players = 11;
+  player.PlayerRef created_by = 12;
+  google.protobuf.Timestamp started_at = 13;
+  google.protobuf.Timestamp ended_at = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+message SelectedNode {
+  SelectedNodeType type = 1;
+  google.protobuf.Int32Value id = 2;
+  string name = 3;
+  string location = 4;
+  string ip_addr = 5;
+  // for private node type
+  google.protobuf.StringValue secret = 6;
+}
+
+enum SelectedNodeType {
+  SelectedNodeTypePublic = 0;
+  SelectedNodeTypePrivate = 1;
+}
+
+message Slot {
+  player.PlayerRef player = 1;
+  google.protobuf.UInt32Value player_id = 2;
+  SlotSettings settings = 3;
+}
+
+message SlotSettings {
+  uint32 team = 1;
+  uint32 color = 2;
+  Computer computer = 3;
+  uint32 handicap = 4;
+  SlotStatus status = 5;
+  Race race = 6;
+}
+
+enum SlotStatus {
+  SlotStatusOpen = 0;
+  SlotStatusClosed = 1;
+  SlotStatusOccupied = 2;
+}
+
+enum Race {
+  RaceHuman = 0;
+  RaceOrc = 1;
+  RaceNightElf = 2;
+  RaceUndead = 3;
+  RaceRandom = 4;
+}
+
+enum Computer {
+  ComputerEasy = 0;
+  ComputerNormal = 1;
+  ComputerInsane = 2;
+}
+
+message Map {
+  bytes sha1 = 1;
+  uint32 checksum = 2;
+  string name = 3;
+  string description = 4;
+  string author = 5;
+  string path = 6;
+  uint32 width = 7;
+  uint32 height = 8;
+  repeated MapPlayer players = 9;
+  repeated MapForce forces = 10;
+}
+
+message MapPlayer {
+  string name = 1;
+  uint32 type = 2;
+  uint32 race = 3;
+  uint32 flags = 4;
+}
+
+message MapForce {
+  string name = 1;
+  uint32 flags = 2;
+  uint32 player_set = 3;
+}
+
+enum GameStatus {
+  GameStatusPreparing = 0;
+  GameStatusPlaying = 1;
+  GameStatusEnded = 2;
+  GameStatusPaused = 3;
+}

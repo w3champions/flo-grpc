@@ -1,0 +1,26 @@
+syntax = "proto3";
+package player;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+enum PlayerSource { PlayerSourceBNet = 0; }
+
+message Player {
+  int32 id = 1;
+  string name = 2;
+  PlayerSource source = 3;
+  string source_id = 4;
+  google.protobuf.Value source_state = 5;
+  google.protobuf.StringValue realm = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+message PlayerRef {
+  int32 id = 1;
+  string name = 2;
+  PlayerSource source = 3;
+  google.protobuf.StringValue realm = 5;
+}
