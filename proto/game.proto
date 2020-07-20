@@ -25,6 +25,22 @@ message Game {
   google.protobuf.Timestamp updated_at = 16;
 }
 
+message GameEntry {
+  int32 id = 1;
+  string name = 2;
+  string map_name = 3;
+  GameStatus status = 4;
+  bool is_private = 5;
+  bool is_live = 6;
+  int32 num_players = 7;
+  int32 max_players = 8;
+  player.PlayerRef created_by = 9;
+  google.protobuf.Timestamp started_at = 10;
+  google.protobuf.Timestamp ended_at = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
 message SelectedNode {
   SelectedNodeType type = 1;
   google.protobuf.Int32Value id = 2;
@@ -42,8 +58,7 @@ enum SelectedNodeType {
 
 message Slot {
   player.PlayerRef player = 1;
-  google.protobuf.UInt32Value player_id = 2;
-  SlotSettings settings = 3;
+  SlotSettings settings = 2;
 }
 
 message SlotSettings {

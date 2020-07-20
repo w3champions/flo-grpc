@@ -5,7 +5,10 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
-enum PlayerSource { PlayerSourceBNet = 0; }
+enum PlayerSource {
+  PlayerSourceTest = 0;
+  PlayerSourceBNet = 1;
+}
 
 message Player {
   int32 id = 1;

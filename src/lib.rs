@@ -17,10 +17,6 @@ pub mod lobby {
   tonic::include_proto!("lobby");
 }
 
-pub mod node {
-  tonic::include_proto!("node");
-}
-
 pub mod connect {
   tonic::include_proto!("connect");
 }
