@@ -3,7 +3,6 @@ package game;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
 import "player.proto";
 
 message Game {

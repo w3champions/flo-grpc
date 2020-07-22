@@ -15,10 +15,14 @@ message Player {
   string name = 2;
   PlayerSource source = 3;
   string source_id = 4;
-  google.protobuf.Value source_state = 5;
+  PlayerSourceState source_state = 5;
   google.protobuf.StringValue realm = 6;
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
+}
+
+message PlayerSourceState {
+  oneof source_state_oneof { BNetState bnet = 1; }
 }
 
 message PlayerRef {
@@ -26,4 +30,10 @@ message PlayerRef {
   string name = 2;
   PlayerSource source = 3;
   google.protobuf.StringValue realm = 5;
+}
+
+message BNetState {
+  uint64 account_id = 1;
+  string access_token = 2;
+  uint64 access_token_exp = 3;
 }

@@ -9,14 +9,6 @@ pub mod game {
   tonic::include_proto!("game");
 }
 
-pub mod auth {
-  tonic::include_proto!("auth");
-}
-
 pub mod lobby {
   tonic::include_proto!("lobby");
-}
-
-pub mod connect {
-  tonic::include_proto!("connect");
 }

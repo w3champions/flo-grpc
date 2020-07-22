@@ -4,12 +4,17 @@ package lobby;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
 import "player.proto";
 import "game.proto";
 
 // Service runs on Flo Lobby servers
 // Used by W3Flo.com
 service FloLobby {
+  rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
+  rpc GetPlayerByToken(GetPlayerByTokenRequest) returns (GetPlayerReply) {}
+  rpc UpdateAndGetPlayer(UpdateAndGetPlayerRequest)
+      returns (UpdateAndGetPlayerReply) {}
   // Lists all nodes
   rpc ListNodes(google.protobuf.Empty) returns (ListNodesReply) {}
   // Lists games
@@ -25,6 +30,25 @@ service FloLobby {
       returns (UpdateGameSlotSettingsReply) {}
   // Cancels a game
   rpc CancelGame(CancelGameRequest) returns (google.protobuf.Empty) {}
+}
+
+message GetPlayerRequest { int32 player_id = 1; }
+
+message GetPlayerByTokenRequest { string token = 1; }
+
+message GetPlayerReply { player.Player player = 1; }
+
+message UpdateAndGetPlayerRequest {
+  string name = 1;
+  player.PlayerSource source = 2;
+  string source_id = 3;
+  player.PlayerSourceState source_state = 4;
+  google.protobuf.StringValue realm = 5;
+}
+
+message UpdateAndGetPlayerReply {
+  player.Player player = 1;
+  string token = 2;
 }
 
 message ListNodesReply { repeated Node nodes = 1; }
