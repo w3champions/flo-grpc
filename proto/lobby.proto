@@ -30,6 +30,11 @@ service FloLobby {
       returns (UpdateGameSlotSettingsReply) {}
   // Cancels a game
   rpc CancelGame(CancelGameRequest) returns (google.protobuf.Empty) {}
+  // Imports map checksums
+  rpc ImportMapChecksums(ImportMapChecksumsRequest)
+      returns (ImportMapChecksumsReply) {}
+  rpc SearchMapChecksum(SearchMapChecksumRequest)
+      returns (SearchMapChecksumReply) {}
 }
 
 message GetPlayerRequest { int32 player_id = 1; }
@@ -117,3 +122,13 @@ message Node {
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
 }
+
+message ImportMapChecksumsRequest {
+  repeated game.MapChecksumImportItem items = 1;
+}
+
+message ImportMapChecksumsReply { uint32 updated = 1; }
+
+message SearchMapChecksumRequest { string sha1 = 1; }
+
+message SearchMapChecksumReply { google.protobuf.UInt32Value checksum = 1; }

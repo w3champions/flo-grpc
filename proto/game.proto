@@ -121,3 +121,8 @@ enum GameStatus {
   GameStatusEnded = 2;
   GameStatusPaused = 3;
 }
+
+message MapChecksumImportItem {
+  string sha1 = 1;
+  uint32 checksum = 2;
+}
