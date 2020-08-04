@@ -22,6 +22,10 @@ service FloLobby {
   rpc CreateGame(CreateGameRequest) returns (CreateGameReply) {}
   // Joins a game
   rpc JoinGame(JoinGameRequest) returns (JoinGameReply) {}
+  // Creates a join token
+  rpc CreateJoinGameToken(CreateJoinGameTokenRequest) returns (CreateJoinGameTokenReply) {}
+  // Join a game by token
+  rpc JoinGameByToken(JoinGameByTokenRequest) returns (JoinGameReply) {}
   // Leaves a game
   rpc LeaveGame(LeaveGameRequest) returns (google.protobuf.Empty) {}
   // Updates a slot
@@ -94,6 +98,20 @@ message JoinGameRequest {
 }
 
 message JoinGameReply { game.Game game = 1; }
+
+message CreateJoinGameTokenRequest {
+  int32 game_id = 1;
+  int32 player_id = 2;
+}
+
+message CreateJoinGameTokenReply {
+  string token = 1;
+}
+
+message JoinGameByTokenRequest {
+  string token = 1;
+  int32 player_id = 2;
+}
 
 message LeaveGameRequest {
   int32 game_id = 1;
