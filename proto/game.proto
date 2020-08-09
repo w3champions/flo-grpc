@@ -46,8 +46,9 @@ message SelectedNode {
   string name = 3;
   string location = 4;
   string ip_addr = 5;
+  string country_id = 6;
   // for private node type
-  google.protobuf.StringValue secret = 6;
+  google.protobuf.StringValue secret = 7;
 }
 
 enum SelectedNodeType {

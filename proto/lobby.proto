@@ -2,7 +2,6 @@ syntax = "proto3";
 package lobby;
 
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "player.proto";
 import "game.proto";
@@ -136,8 +135,7 @@ message Node {
   string name = 2;
   string location = 3;
   string ip_addr = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
+  string country_id = 5;
 }
 
 message ImportMapChecksumsRequest {
