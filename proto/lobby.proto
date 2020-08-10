@@ -30,6 +30,9 @@ service FloLobby {
   // Updates a slot
   rpc UpdateGameSlotSettings(UpdateGameSlotSettingsRequest)
       returns (UpdateGameSlotSettingsReply) {}
+  // Select a node that will be used
+  rpc SelectGameNode(SelectGameNodeRequest)
+      returns (google.protobuf.Empty) {}
   // Cancels a game
   rpc CancelGame(CancelGameRequest) returns (google.protobuf.Empty) {}
   // Imports map checksums
@@ -124,6 +127,12 @@ message UpdateGameSlotSettingsRequest {
 }
 
 message UpdateGameSlotSettingsReply { repeated game.Slot slots = 1; }
+
+message SelectGameNodeRequest {
+  int32 game_id = 1;
+  int32 player_id = 2;
+  google.protobuf.Int32Value node_id = 3;
+}
 
 message CancelGameRequest {
   int32 game_id = 1;
