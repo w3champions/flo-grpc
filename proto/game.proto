@@ -118,9 +118,11 @@ message MapForce {
 
 enum GameStatus {
   GameStatusPreparing = 0;
-  GameStatusPlaying = 1;
-  GameStatusEnded = 2;
-  GameStatusPaused = 3;
+  GameStatusCreated = 1;
+  GameStatusRunning = 2;
+  GameStatusEnded = 3;
+  GameStatusPaused = 4;
+  GameStatusTerminated = 5;
 }
 
 message MapChecksumImportItem {
