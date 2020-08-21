@@ -1,14 +1,12 @@
 syntax = "proto3";
-package lobby;
+package controller;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "player.proto";
 import "game.proto";
 
-// Service runs on Flo Lobby servers
-// Used by W3Flo.com
-service FloLobby {
+service FloController {
   rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
   rpc GetPlayerByToken(GetPlayerByTokenRequest) returns (GetPlayerReply) {}
   rpc UpdateAndGetPlayer(UpdateAndGetPlayerRequest)
@@ -27,9 +25,6 @@ service FloLobby {
   rpc JoinGameByToken(JoinGameByTokenRequest) returns (JoinGameReply) {}
   // Leaves a game
   rpc LeaveGame(LeaveGameRequest) returns (google.protobuf.Empty) {}
-  // Updates a slot
-  rpc UpdateGameSlotSettings(UpdateGameSlotSettingsRequest)
-      returns (UpdateGameSlotSettingsReply) {}
   // Select a node that will be used
   rpc SelectGameNode(SelectGameNodeRequest)
       returns (google.protobuf.Empty) {}
@@ -119,14 +114,6 @@ message LeaveGameRequest {
   int32 game_id = 1;
   int32 player_id = 2;
 }
-
-message UpdateGameSlotSettingsRequest {
-  int32 game_id = 1;
-  int32 player_id = 2;
-  game.SlotSettings settings = 3;
-}
-
-message UpdateGameSlotSettingsReply { repeated game.Slot slots = 1; }
 
 message SelectGameNodeRequest {
   int32 game_id = 1;
