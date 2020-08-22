@@ -4,6 +4,7 @@ package game;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "player.proto";
+import "node.proto";
 
 message Game {
   int32 id = 1;
@@ -11,7 +12,7 @@ message Game {
   GameStatus status = 3;
   Map map = 4;
   repeated Slot slots = 5;
-  SelectedNode node = 6;
+  node.Node node = 6;
   bool is_private = 7;
   google.protobuf.Int32Value secret = 8;
   bool is_live = 9;
@@ -33,27 +34,12 @@ message GameEntry {
   bool is_live = 6;
   int32 num_players = 7;
   int32 max_players = 8;
-  player.PlayerRef created_by = 9;
-  google.protobuf.Timestamp started_at = 10;
-  google.protobuf.Timestamp ended_at = 11;
-  google.protobuf.Timestamp created_at = 12;
-  google.protobuf.Timestamp updated_at = 13;
-}
-
-message SelectedNode {
-  SelectedNodeType type = 1;
-  google.protobuf.Int32Value id = 2;
-  string name = 3;
-  string location = 4;
-  string ip_addr = 5;
-  string country_id = 6;
-  // for private node type
-  google.protobuf.StringValue secret = 7;
-}
-
-enum SelectedNodeType {
-  SelectedNodeTypePublic = 0;
-  SelectedNodeTypePrivate = 1;
+  node.Node node = 9;
+  player.PlayerRef created_by = 10;
+  google.protobuf.Timestamp started_at = 11;
+  google.protobuf.Timestamp ended_at = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
 }
 
 message Slot {

@@ -9,6 +9,10 @@ pub mod game {
   tonic::include_proto!("game");
 }
 
+pub mod node {
+  tonic::include_proto!("node");
+}
+
 pub mod controller {
   tonic::include_proto!("controller");
 }

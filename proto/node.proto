@@ -1,0 +1,10 @@
+syntax = "proto3";
+package node;
+
+message Node {
+  int32 id = 1;
+  string name = 2;
+  string location = 3;
+  string ip_addr = 4;
+  string country_id = 5;
+}
