@@ -18,11 +18,12 @@ message Game {
   bool is_live = 9;
   int32 num_players = 10;
   int32 max_players = 11;
-  player.PlayerRef created_by = 12;
-  google.protobuf.Timestamp started_at = 13;
-  google.protobuf.Timestamp ended_at = 14;
-  google.protobuf.Timestamp created_at = 15;
-  google.protobuf.Timestamp updated_at = 16;
+  int32 random_seed = 12;
+  player.PlayerRef created_by = 13;
+  google.protobuf.Timestamp started_at = 14;
+  google.protobuf.Timestamp ended_at = 15;
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
 }
 
 message GameEntry {
