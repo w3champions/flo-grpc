@@ -37,3 +37,16 @@ message BNetState {
   string access_token = 2;
   uint64 access_token_exp = 3;
 }
+
+message PlayerPingMap {
+  int32 player_id = 1;
+  map<int32, PingStats> ping_map = 3;
+}
+
+message PingStats {
+  google.protobuf.UInt32Value current = 1;
+  google.protobuf.UInt32Value avg = 2;
+  google.protobuf.UInt32Value min = 3;
+  google.protobuf.UInt32Value max = 4;
+  float loss_rate = 5;
+}

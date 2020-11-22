@@ -10,6 +10,8 @@ import "node.proto";
 service FloController {
   rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
   rpc GetPlayerByToken(GetPlayerByTokenRequest) returns (GetPlayerReply) {}
+  rpc GetPlayersBySourceIds(GetPlayersBySourceIdsRequest) returns (GetPlayersBySourceIdsReply) {}
+  rpc GetPlayerPingMaps(GetPlayerPingMapsRequest) returns (GetPlayerPingMapsReply) {}
   rpc UpdateAndGetPlayer(UpdateAndGetPlayerRequest)
       returns (UpdateAndGetPlayerReply) {}
   // Lists all nodes
@@ -18,6 +20,9 @@ service FloController {
   rpc ListGames(ListGamesRequest) returns (ListGamesReply) {}
   // Creates a new game
   rpc CreateGame(CreateGameRequest) returns (CreateGameReply) {}
+  // Creates a game with node selected and slots configured
+  rpc CreateGameAsBot(CreateGameAsBotRequest) returns (CreateGameAsBotReply) {}
+  rpc StartGameAsBot(StartGameAsBotRequest) returns (StartGameAsBotReply) {}
   // Joins a game
   rpc JoinGame(JoinGameRequest) returns (JoinGameReply) {}
   // Creates a join token
@@ -43,6 +48,23 @@ message GetPlayerRequest { int32 player_id = 1; }
 message GetPlayerByTokenRequest { string token = 1; }
 
 message GetPlayerReply { player.Player player = 1; }
+
+message GetPlayersBySourceIdsRequest {
+  player.PlayerSource source = 1;
+  repeated string source_ids = 2;
+}
+
+message GetPlayersBySourceIdsReply {
+  map<string, player.PlayerRef> player_map = 1;
+}
+
+message GetPlayerPingMapsRequest {
+  repeated int32 ids = 1;
+}
+
+message GetPlayerPingMapsReply {
+  repeated player.PlayerPingMap ping_maps = 1;
+}
 
 message UpdateAndGetPlayerRequest {
   string name = 1;
@@ -89,6 +111,37 @@ message CreateGameRequest {
 }
 
 message CreateGameReply { game.Game game = 1; }
+
+message CreateGameAsBotRequest {
+  string name = 2;
+  game.Map map = 3;
+  bool is_private = 4;
+  bool is_live = 5;
+  int32 node_id = 6;
+  repeated CreateGameSlot slots = 7;
+}
+
+message CreateGameSlot {
+  google.protobuf.Int32Value player_id = 1;
+  game.SlotSettings settings = 2;
+}
+
+message CreateGameAsBotReply { game.Game game = 1; }
+
+message StartGameAsBotRequest {
+  int32 game_id = 1;
+}
+
+message StartGameAsBotReply {
+  bool succeed = 1;
+  string error_message = 2;
+  map<int32, StartGamePlayerAck> player_ack_map = 3;
+}
+
+message StartGamePlayerAck {
+  string war3_version = 2;
+  bytes map_sha1 = 3;
+}
 
 message JoinGameRequest {
   int32 game_id = 1;
