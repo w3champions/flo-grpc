@@ -23,6 +23,7 @@ service FloController {
   // Creates a game with node selected and slots configured
   rpc CreateGameAsBot(CreateGameAsBotRequest) returns (CreateGameAsBotReply) {}
   rpc StartGameAsBot(StartGameAsBotRequest) returns (StartGameAsBotReply) {}
+  rpc StartGameCountdownAsBot(StartGameCountdownAsBotRequest) returns (google.protobuf.Empty) {}
   // Joins a game
   rpc JoinGame(JoinGameRequest) returns (JoinGameReply) {}
   // Creates a join token
@@ -137,6 +138,8 @@ message StartGameAsBotReply {
   string error_message = 2;
   map<int32, StartGamePlayerAck> player_ack_map = 3;
 }
+
+message StartGameCountdownAsBotRequest { int32 game_id = 1; }
 
 message StartGamePlayerAck {
   string war3_version = 2;
