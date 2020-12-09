@@ -23,7 +23,6 @@ service FloController {
   // Creates a game with node selected and slots configured
   rpc CreateGameAsBot(CreateGameAsBotRequest) returns (CreateGameAsBotReply) {}
   rpc StartGameAsBot(StartGameAsBotRequest) returns (StartGameAsBotReply) {}
-  rpc StartGameCountdownAsBot(StartGameCountdownAsBotRequest) returns (google.protobuf.Empty) {}
   // Joins a game
   rpc JoinGame(JoinGameRequest) returns (JoinGameReply) {}
   // Creates a join token
@@ -37,6 +36,7 @@ service FloController {
       returns (google.protobuf.Empty) {}
   // Cancels a game
   rpc CancelGame(CancelGameRequest) returns (google.protobuf.Empty) {}
+  rpc CancelGameAsBot(CancelGameAsBotRequest) returns (google.protobuf.Empty) {}
   // Imports map checksums
   rpc ImportMapChecksums(ImportMapChecksumsRequest)
       returns (ImportMapChecksumsReply) {}
@@ -181,6 +181,10 @@ message SelectGameNodeRequest {
 message CancelGameRequest {
   int32 game_id = 1;
   int32 player_id = 2;
+}
+
+message CancelGameAsBotRequest {
+  int32 game_id = 1;
 }
 
 message ImportMapChecksumsRequest {
