@@ -42,6 +42,7 @@ service FloController {
       returns (ImportMapChecksumsReply) {}
   rpc SearchMapChecksum(SearchMapChecksumRequest)
       returns (SearchMapChecksumReply) {}
+  rpc Reload(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 message GetPlayerRequest { int32 player_id = 1; }
