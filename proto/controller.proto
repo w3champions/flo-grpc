@@ -3,6 +3,7 @@ package controller;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "player.proto";
 import "game.proto";
 import "node.proto";
@@ -43,6 +44,9 @@ service FloController {
   rpc SearchMapChecksum(SearchMapChecksumRequest)
       returns (SearchMapChecksumReply) {}
   rpc Reload(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc ListPlayerBans(ListPlayerBansRequest) returns (ListPlayerBansReply) {}
+  rpc CreatePlayerBan(CreatePlayerBanRequest) returns (CreatePlayerBanReply) {}
+  rpc RemovePlayerBan(RemovePlayerBanRequest) returns (google.protobuf.Empty) {}
 }
 
 message GetPlayerRequest { int32 player_id = 1; }
@@ -197,3 +201,27 @@ message ImportMapChecksumsReply { uint32 updated = 1; }
 message SearchMapChecksumRequest { string sha1 = 1; }
 
 message SearchMapChecksumReply { google.protobuf.UInt32Value checksum = 1; }
+
+message ListPlayerBansRequest {
+  google.protobuf.StringValue query = 1;
+  google.protobuf.StringValue next_token = 2;
+}
+
+message ListPlayerBansReply {
+  repeated player.PlayerBan player_bans = 1;
+  google.protobuf.StringValue next_token = 2;
+}
+
+message CreatePlayerBanRequest {
+  int32 player_id = 1;
+  player.PlayerBanType ban_type = 3;
+  google.protobuf.Timestamp ban_expires_at = 4;
+}
+
+message CreatePlayerBanReply {
+  player.PlayerBan player_ban = 1;
+}
+
+message RemovePlayerBanRequest {
+  int32 id = 1;
+}

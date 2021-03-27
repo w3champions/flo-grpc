@@ -54,3 +54,12 @@ message PingStats {
 enum PlayerBanType {
   PlayerBanTypeChat = 0;
 }
+
+message PlayerBan {
+  int32 id = 1;
+  PlayerRef player = 2;
+  PlayerBanType ban_type = 3;
+  google.protobuf.Timestamp ban_expires_at = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
