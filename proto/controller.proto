@@ -45,7 +45,7 @@ service FloController {
       returns (SearchMapChecksumReply) {}
   rpc Reload(google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc ListPlayerBans(ListPlayerBansRequest) returns (ListPlayerBansReply) {}
-  rpc CreatePlayerBan(CreatePlayerBanRequest) returns (CreatePlayerBanReply) {}
+  rpc CreatePlayerBan(CreatePlayerBanRequest) returns (google.protobuf.Empty) {}
   rpc RemovePlayerBan(RemovePlayerBanRequest) returns (google.protobuf.Empty) {}
 }
 
@@ -204,22 +204,18 @@ message SearchMapChecksumReply { google.protobuf.UInt32Value checksum = 1; }
 
 message ListPlayerBansRequest {
   google.protobuf.StringValue query = 1;
-  google.protobuf.StringValue next_token = 2;
+  google.protobuf.Int32Value next_id = 2;
 }
 
 message ListPlayerBansReply {
   repeated player.PlayerBan player_bans = 1;
-  google.protobuf.StringValue next_token = 2;
+  google.protobuf.Int32Value next_id = 2;
 }
 
 message CreatePlayerBanRequest {
   int32 player_id = 1;
   player.PlayerBanType ban_type = 3;
   google.protobuf.Timestamp ban_expires_at = 4;
-}
-
-message CreatePlayerBanReply {
-  player.PlayerBan player_ban = 1;
 }
 
 message RemovePlayerBanRequest {
