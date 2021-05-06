@@ -125,6 +125,7 @@ message CreateGameAsBotRequest {
   bool is_live = 5;
   int32 node_id = 6;
   repeated CreateGameSlot slots = 7;
+  google.protobuf.BoolValue mask_player_names = 8;
 }
 
 message CreateGameSlot {
