@@ -19,6 +19,7 @@ service FloController {
   rpc ListNodes(google.protobuf.Empty) returns (ListNodesReply) {}
   // Lists games
   rpc ListGames(ListGamesRequest) returns (ListGamesReply) {}
+  rpc GetGame(GetGameRequest) returns (GetGameReply) {}
   // Creates a new game
   rpc CreateGame(CreateGameRequest) returns (CreateGameReply) {}
   // Creates a game with node selected and slots configured
@@ -106,6 +107,14 @@ enum GameStatusFilter {
 message ListGamesReply {
   repeated game.GameEntry games = 1;
   bool has_more = 2;
+}
+
+message GetGameRequest {
+  int32 game_id = 1;
+}
+
+message GetGameReply {
+  game.Game game = 1;
 }
 
 message CreateGameRequest {
