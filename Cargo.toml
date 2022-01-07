@@ -5,11 +5,11 @@ authors = ["Flux Xu <fluxxu@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-prost = "0.7"
-prost-types = "0.7"
-bytes = "0.6.0"
-tonic =  "0.4"
+prost = "0.9"
+prost-types = "0.9"
+bytes = "1.1.0"
+tonic = "0.6"
 anyhow = "1.0"
 
 [build-dependencies]
-tonic-build = "0.4"
+tonic-build = "0.6"
