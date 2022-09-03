@@ -11,8 +11,10 @@ import "node.proto";
 service FloController {
   rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
   rpc GetPlayerByToken(GetPlayerByTokenRequest) returns (GetPlayerReply) {}
-  rpc GetPlayersBySourceIds(GetPlayersBySourceIdsRequest) returns (GetPlayersBySourceIdsReply) {}
-  rpc GetPlayerPingMaps(GetPlayerPingMapsRequest) returns (GetPlayerPingMapsReply) {}
+  rpc GetPlayersBySourceIds(GetPlayersBySourceIdsRequest)
+      returns (GetPlayersBySourceIdsReply) {}
+  rpc GetPlayerPingMaps(GetPlayerPingMapsRequest)
+      returns (GetPlayerPingMapsReply) {}
   rpc UpdateAndGetPlayer(UpdateAndGetPlayerRequest)
       returns (UpdateAndGetPlayerReply) {}
   // Lists all nodes
@@ -28,14 +30,14 @@ service FloController {
   // Joins a game
   rpc JoinGame(JoinGameRequest) returns (JoinGameReply) {}
   // Creates a join token
-  rpc CreateJoinGameToken(CreateJoinGameTokenRequest) returns (CreateJoinGameTokenReply) {}
+  rpc CreateJoinGameToken(CreateJoinGameTokenRequest)
+      returns (CreateJoinGameTokenReply) {}
   // Join a game by token
   rpc JoinGameByToken(JoinGameByTokenRequest) returns (JoinGameReply) {}
   // Leaves a game
   rpc LeaveGame(LeaveGameRequest) returns (google.protobuf.Empty) {}
   // Select a node that will be used
-  rpc SelectGameNode(SelectGameNodeRequest)
-      returns (google.protobuf.Empty) {}
+  rpc SelectGameNode(SelectGameNodeRequest) returns (google.protobuf.Empty) {}
   // Cancels a game
   rpc CancelGame(CancelGameRequest) returns (google.protobuf.Empty) {}
   rpc CancelGameAsBot(CancelGameAsBotRequest) returns (google.protobuf.Empty) {}
@@ -65,13 +67,9 @@ message GetPlayersBySourceIdsReply {
   map<string, player.PlayerRef> player_map = 1;
 }
 
-message GetPlayerPingMapsRequest {
-  repeated int32 ids = 1;
-}
+message GetPlayerPingMapsRequest { repeated int32 ids = 1; }
 
-message GetPlayerPingMapsReply {
-  repeated player.PlayerPingMap ping_maps = 1;
-}
+message GetPlayerPingMapsReply { repeated player.PlayerPingMap ping_maps = 1; }
 
 message UpdateAndGetPlayerRequest {
   string name = 1;
@@ -95,6 +93,7 @@ message ListGamesRequest {
   google.protobuf.BoolValue is_live = 4;
   google.protobuf.Int64Value take = 5;
   google.protobuf.Int32Value since_id = 6;
+  google.protobuf.Int32Value player_id = 6;
 }
 
 enum GameStatusFilter {
@@ -109,13 +108,9 @@ message ListGamesReply {
   bool has_more = 2;
 }
 
-message GetGameRequest {
-  int32 game_id = 1;
-}
+message GetGameRequest { int32 game_id = 1; }
 
-message GetGameReply {
-  game.Game game = 1;
-}
+message GetGameReply { game.Game game = 1; }
 
 message CreateGameRequest {
   int32 player_id = 1;
@@ -144,9 +139,7 @@ message CreateGameSlot {
 
 message CreateGameAsBotReply { game.Game game = 1; }
 
-message StartGameAsBotRequest {
-  int32 game_id = 1;
-}
+message StartGameAsBotRequest { int32 game_id = 1; }
 
 message StartGameAsBotReply {
   bool succeed = 1;
@@ -173,9 +166,7 @@ message CreateJoinGameTokenRequest {
   int32 player_id = 2;
 }
 
-message CreateJoinGameTokenReply {
-  string token = 1;
-}
+message CreateJoinGameTokenReply { string token = 1; }
 
 message JoinGameByTokenRequest {
   string token = 1;
@@ -198,9 +189,7 @@ message CancelGameRequest {
   int32 player_id = 2;
 }
 
-message CancelGameAsBotRequest {
-  int32 game_id = 1;
-}
+message CancelGameAsBotRequest { int32 game_id = 1; }
 
 message ImportMapChecksumsRequest {
   repeated game.MapChecksumImportItem items = 1;
@@ -228,6 +217,4 @@ message CreatePlayerBanRequest {
   google.protobuf.Timestamp ban_expires_at = 4;
 }
 
-message RemovePlayerBanRequest {
-  int32 id = 1;
-}
+message RemovePlayerBanRequest { int32 id = 1; }
