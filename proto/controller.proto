@@ -93,7 +93,7 @@ message ListGamesRequest {
   google.protobuf.BoolValue is_live = 4;
   google.protobuf.Int64Value take = 5;
   google.protobuf.Int32Value since_id = 6;
-  google.protobuf.Int32Value player_id = 6;
+  google.protobuf.Int32Value player_id = 7;
 }
 
 enum GameStatusFilter {
