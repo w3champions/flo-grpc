@@ -26,6 +26,7 @@ message Game {
   google.protobuf.Timestamp updated_at = 17;
   bool mask_player_names = 18;
   google.protobuf.StringValue game_version = 19;
+  bool enable_ping_equalizer = 20;
 }
 
 message GameEntry {
