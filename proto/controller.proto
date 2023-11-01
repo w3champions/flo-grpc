@@ -131,6 +131,7 @@ message CreateGameAsBotRequest {
   repeated CreateGameSlot slots = 7;
   bool mask_player_names = 8;
   bool enable_ping_equalizer = 9;
+  google.protobuf.Int32Value flo_tv_delay_override_secs = 10;
 }
 
 message CreateGameSlot {
