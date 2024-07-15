@@ -102,6 +102,7 @@ message Map {
   uint32 height = 8;
   repeated MapPlayer players = 9;
   repeated MapForce forces = 10;
+  bool twelve_p = 11;
 }
 
 message MapPlayer {
