@@ -115,7 +115,7 @@ message GetGameReply { game.Game game = 1; }
 message CreateGameRequest {
   int32 player_id = 1;
   string name = 2;
-  game.Map map = 3;
+  game.Wc3Map map = 3;
   bool is_private = 4;
   bool is_live = 5;
 }
@@ -124,7 +124,7 @@ message CreateGameReply { game.Game game = 1; }
 
 message CreateGameAsBotRequest {
   string name = 2;
-  game.Map map = 3;
+  game.Wc3Map map = 3;
   bool is_private = 4;
   bool is_live = 5;
   int32 node_id = 6;

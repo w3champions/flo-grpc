@@ -10,7 +10,7 @@ message Game {
   int32 id = 1;
   string name = 2;
   GameStatus status = 3;
-  Map map = 4;
+  Wc3Map map = 4;
   repeated Slot slots = 5;
   node.Node node = 6;
   bool is_private = 7;
@@ -91,7 +91,7 @@ enum SlotClientStatus {
   SlotClientStatusLeft = 5;
 }
 
-message Map {
+message Wc3Map {
   bytes sha1 = 1;
   uint32 checksum = 2;
   string name = 3;
