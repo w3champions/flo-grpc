@@ -61,4 +61,5 @@ message PlayerBan {
   PlayerBanType ban_type = 3;
   google.protobuf.Timestamp ban_expires_at = 4;
   google.protobuf.Timestamp created_at = 5;
+  google.protobuf.StringValue author = 6;
 }
