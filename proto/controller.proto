@@ -217,6 +217,7 @@ message CreatePlayerBanRequest {
   int32 player_id = 1;
   player.PlayerBanType ban_type = 3;
   google.protobuf.Timestamp ban_expires_at = 4;
+  google.protobuf.StringValue author = 5;
 }
 
 message RemovePlayerBanRequest { int32 id = 1; }
