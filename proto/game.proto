@@ -28,6 +28,7 @@ message Game {
   google.protobuf.StringValue game_version = 19;
   bool enable_ping_equalizer = 20;
   google.protobuf.Int32Value flo_tv_delay_override_secs = 21;
+  optional google.protobuf.StringValue flo_tv_password_sha256 = 22;
 }
 
 message GameEntry {

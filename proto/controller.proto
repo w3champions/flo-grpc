@@ -118,6 +118,7 @@ message CreateGameRequest {
   game.Wc3Map map = 3;
   bool is_private = 4;
   bool is_live = 5;
+  optional string flo_tv_password_sha256 = 6;
 }
 
 message CreateGameReply { game.Game game = 1; }
@@ -132,6 +133,7 @@ message CreateGameAsBotRequest {
   bool mask_player_names = 8;
   bool enable_ping_equalizer = 9;
   google.protobuf.Int32Value flo_tv_delay_override_secs = 10;
+  optional string flo_tv_password_sha256 = 11;
 }
 
 message CreateGameSlot {
