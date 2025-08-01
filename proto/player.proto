@@ -49,6 +49,7 @@ message PingStats {
   google.protobuf.UInt32Value min = 3;
   google.protobuf.UInt32Value max = 4;
   float loss_rate = 5;
+  google.protobuf.FloatValue stddev = 6;
 }
 
 enum PlayerBanType {
