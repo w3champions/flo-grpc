@@ -7,4 +7,5 @@ message Node {
   string location = 3;
   string ip_addr = 4;
   string country_id = 5;
+  bool connected = 6;
 }
