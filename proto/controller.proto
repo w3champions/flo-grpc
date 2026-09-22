@@ -119,6 +119,7 @@ message CreateGameRequest {
   bool is_private = 4;
   bool is_live = 5;
   optional string flo_tv_password_sha256 = 6;
+  optional string historical_file_url = 7;
 }
 
 message CreateGameReply { game.Game game = 1; }
@@ -134,6 +135,7 @@ message CreateGameAsBotRequest {
   bool enable_ping_equalizer = 9;
   google.protobuf.Int32Value flo_tv_delay_override_secs = 10;
   optional string flo_tv_password_sha256 = 11;
+  optional string historical_file_url = 12;
 }
 
 message CreateGameSlot {
