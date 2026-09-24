@@ -9,6 +9,7 @@ import "game.proto";
 import "node.proto";
 
 service FloController {
+  rpc InspectReplay(InspectReplayRequest) returns (InspectReplayReply) {}
   rpc GetPlayer(GetPlayerRequest) returns (GetPlayerReply) {}
   rpc GetPlayerByToken(GetPlayerByTokenRequest) returns (GetPlayerReply) {}
   rpc GetPlayersBySourceIds(GetPlayersBySourceIdsRequest)
@@ -53,6 +54,21 @@ service FloController {
 }
 
 message GetPlayerRequest { int32 player_id = 1; }
+
+message InspectReplayRequest {
+  string file_id = 1;
+  int32 owner_id = 2;
+  string warcraft_version = 3;
+}
+message InspectReplayReply {
+  string file_id = 1;
+  int32 owner_id = 2;
+  uint64 resume_timestamp_ms = 3;
+  uint64 action_duration_ms = 4;
+  uint64 effective_timestamp_ms = 5;
+  int64 expires_at = 6;
+  string metadata_json = 7;
+}
 
 message GetPlayerByTokenRequest { string token = 1; }
 
@@ -138,6 +154,9 @@ message CreateGameAsBotRequest {
   optional string flo_tv_password_sha256 = 11;
   reserved 12;
   optional string historical_file_id = 13;
+  optional int32 historical_owner_id = 14;
+  // Controller populates this from its upload store, never trusts caller content.
+  optional string historical_replay_json = 15;
 }
 
 message CreateGameSlot {

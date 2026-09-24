@@ -31,6 +31,8 @@ message Game {
   optional google.protobuf.StringValue flo_tv_password_sha256 = 22;
   reserved 23;
   optional string historical_file_id = 24;
+  optional int32 historical_owner_id = 25;
+  optional string historical_replay_json = 26;
 }
 
 message GameEntry {
