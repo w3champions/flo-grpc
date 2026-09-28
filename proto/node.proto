@@ -8,4 +8,47 @@ message Node {
   string ip_addr = 4;
   string country_id = 5;
   bool connected = 6;
+  // The node's own report of how well it has been running, and what the
+  // controller makes of it. Always set by controllers that know the field.
+  NodeHealth health = 7;
+}
+
+enum NodeHealthState {
+  // No fresh report: the node predates health reports, is not connected,
+  // or has gone quiet. Carries no penalty.
+  NodeHealthStateUnknown = 0;
+  NodeHealthStateHealthy = 1;
+  // Stalling briefly but repeatedly, or stalls have been costing players.
+  NodeHealthStateDegraded = 2;
+  // Freezing now, just recovered from a freeze, or had a long one recently.
+  NodeHealthStateStalling = 3;
+}
+
+enum NodeHealthAdvice {
+  NodeHealthAdviceUnspecified = 0;
+  // Fine to send new games to.
+  NodeHealthAdvicePrefer = 1;
+  // Send new games elsewhere if there is a reasonable alternative.
+  NodeHealthAdviceAvoid = 2;
+}
+
+message NodeHealth {
+  NodeHealthState state = 1;
+  // Derived by the controller with hysteresis, so it does not flap with
+  // every report: AVOID on STALLING or on two DEGRADED reports in a row,
+  // back to PREFER after three HEALTHY reports in a row and at least 300 s
+  // since the last STALLING one.
+  NodeHealthAdvice advice = 2;
+  // Over the node's reporting window (300 s).
+  uint32 worst_stall_ms = 3;
+  uint32 stall_episodes = 4;
+  uint32 stall_ms_total = 5;
+  double impact_player_seconds = 6;
+  uint32 games_active = 7;
+  uint32 players_connected = 8;
+  // Seconds since the last report was received; 0 when there is none.
+  uint32 age_secs = 9;
+  // No report received recently enough to trust: state is then UNKNOWN,
+  // advice PREFER, and every figure but age_secs is zero.
+  bool stale = 10;
 }
