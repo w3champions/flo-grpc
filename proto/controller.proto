@@ -264,6 +264,10 @@ message RelaySeries {
   uint32 bucket_count = 5;
   // "tcp" or "quic"
   string kind = 6;
+  // Start of bucket 0; bucket i covers [start + i*5s, start + (i+1)*5s).
+  // Differs from first_seen_unix_ms because a socket is only bucketed once it
+  // has moved enough bytes to be a game connection.
+  int64 buckets_start_unix_ms = 7;
 }
 
 message RelayCloseLine {
