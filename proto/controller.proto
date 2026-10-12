@@ -140,6 +140,8 @@ message CreateGameRequest {
   optional string flo_tv_password_sha256 = 6;
   reserved 7;
   optional string historical_file_id = 8;
+  // Allow players to rewind the game with -rewind/-confirm. Requires the node's replay cache.
+  bool enable_rewind = 9;
 }
 
 message CreateGameReply { game.Game game = 1; }
@@ -160,6 +162,8 @@ message CreateGameAsBotRequest {
   optional int32 historical_owner_id = 14;
   // Controller populates this from its upload store, never trusts caller content.
   optional string historical_replay_json = 15;
+  // Allow players to rewind the game with -rewind/-confirm. Requires the node's replay cache.
+  bool enable_rewind = 16;
 }
 
 message CreateGameSlot {
