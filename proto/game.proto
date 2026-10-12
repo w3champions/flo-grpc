@@ -39,6 +39,8 @@ message Game {
   optional int32 rewind_target_ms = 29;
   // Set on a game that was rewound; its result should be ignored.
   optional int32 rewound_to_game_id = 30;
+  // flo_types::game::RewindInfo as JSON, set on a game created by a rewind.
+  optional string rewind_json = 31;
 }
 
 message GameEntry {
